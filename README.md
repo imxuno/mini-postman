@@ -1,15 +1,39 @@
-# React + TypeScript + Vite
+# Mini Postman
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 설치 패키지
 
-Currently, two official plugins are available:
+- zustand
+- @tanstack/react-query
+- @tanstack/react-router
+- react-hook-form
+- @hookform/resolvers
+- zod
+- axios
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 의존 패키지
 
-## React Compiler
+- types/node
+- tailwindcss@3
+- postcss
+- autoprefixer
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tailwind CSS 설치
+
+```bash
+npx tailwindcss init
+```
+
+## shadcn 설치
+
+```bash
+npx shadcn@latest init
+```
+
+## shadcn 컴포넌트 설치
+
+```bash
+npx shadcn@latest add [컴포넌트명]
+```
 
 ## Expanding the ESLint configuration
 
@@ -40,15 +64,15 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from 'eslint-plugin-react-x';
+import reactDom from 'eslint-plugin-react-dom';
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -69,5 +93,5 @@ export default defineConfig([
       // other options...
     },
   },
-])
+]);
 ```
