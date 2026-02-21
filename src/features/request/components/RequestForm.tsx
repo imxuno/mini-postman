@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { requestSchema } from '../schemas/requestSchema';
 import type { RequestSchemaType } from '../schemas/requestSchema';
 // Store
-import { useRequestStore } from '@/store/useRequestStore';
+import { useRequestStore } from '@/store';
 // Components
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,13 +20,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 
 export interface RequestFormProps {
-  [key: string]: any;
+  onSubmitAction: (data: RequestSchemaType) => void;
+  isLoading: boolean;
 }
 const RequestForm: React.FC<RequestFormProps> = (props) => {
   /**
    * SECTION - Props
    */
-  const {} = props;
+  const { onSubmitAction, isLoading } = props;
   /**!SECTION - Props */
 
   /**
@@ -111,6 +112,7 @@ const RequestForm: React.FC<RequestFormProps> = (props) => {
     // 여기서 data는 Zod의 검사를 모두 통과한, 100% 안전한 데이터
     // Zod 검사를 통과한 데이터를 Zustand 스토어에 저장
     setRequestData(data);
+    onSubmitAction(data);
 
     console.log('📦 Zustand 스토어에 데이터가 저장되었습니다: ', data);
     alert(
@@ -186,7 +188,7 @@ const RequestForm: React.FC<RequestFormProps> = (props) => {
         >
           <Input
             {...register('url')}
-            placeholder='https://api.github.com/users/defunkt'
+            placeholder='https://jsonplaceholder.typicode.com/posts/1'
             className={errors.url ? 'border-red-500' : ''}
           />
 
@@ -207,7 +209,9 @@ const RequestForm: React.FC<RequestFormProps> = (props) => {
           )}
         </div>
 
-        <Button type='submit'>SEND</Button>
+        <Button type='submit' disabled={isLoading}>
+          SEND
+        </Button>
       </div>
 
       {/* 하단: Tabs를 이용한 상세 설정 영역 */}
