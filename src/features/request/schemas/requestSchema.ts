@@ -11,6 +11,9 @@ export const requestSchema = z.object({
     .string()
     .min(1, { message: 'URL을 입력해주세요.' }) // 빈칸 방지
     .url({ message: '올바른 URL 형식이 압니다. (예: https://...' }), // URL 형식 강제
+  // body는 필수가 아니므로 optional()을 붙여줌
+  // (GET 요청일 때는 body가 필요없기 때문)
+  body: z.string().optional(),
 });
 
 // 이 스키마를 바탕으로 TypeScript의 Type을 자동 생성 (타입 중복 선언 방지)
