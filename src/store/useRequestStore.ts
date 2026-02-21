@@ -20,7 +20,7 @@ interface RequestStore {
  * - create 훅을 사용하여 상태와 액션을 하나로 묶어줌
  * - set 함수를 통해 상태를 안전하게 변경할 수 있음
  */
-export const useRequestStore = create<RequestStore>((set) => ({
+const useRequestStore = create<RequestStore>((set) => ({
   requestData: null, // 초기값은 빈 상태 (null)
 
   // 데이터를 받아서 state의 requestData를 덮어씌움
@@ -29,3 +29,5 @@ export const useRequestStore = create<RequestStore>((set) => ({
   // 상태를 다시 null로 돌려놓음
   clearRequestData: () => set({ requestData: null }),
 }));
+
+export default useRequestStore;
