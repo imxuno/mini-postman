@@ -11,6 +11,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 // Schemas
 import { requestSchema } from '../schemas/requestSchema';
 import type { RequestSchemaType } from '../schemas/requestSchema';
+// Store
+import { useRequestStore } from '@/store/useRequestStore';
 // Components
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -78,7 +80,9 @@ const RequestForm: React.FC<RequestFormProps> = (props) => {
   /**
    * SECTION - Hooks
    */
-
+  // Zustand 스토어에서 데이터를 저장하는 함수(setRequestData)만 뽑아옴
+  // (이렇게 필요한 것만 빼와야 불필요한 리렌더링을 막을 수 있음)
+  const setRequestData = useRequestStore((state) => state.setRequestData);
   /**!SECTION - Hooks */
 
   /**
@@ -105,9 +109,12 @@ const RequestForm: React.FC<RequestFormProps> = (props) => {
   /* 유효성 검사를 통과했을 때만 실행되는 순수 로직 */
   const onSubmit = (data: RequestSchemaType) => {
     // 여기서 data는 Zod의 검사를 모두 통과한, 100% 안전한 데이터
-    console.log('검증 완료된 데이터: ', data);
+    // Zod 검사를 통과한 데이터를 Zustand 스토어에 저장
+    setRequestData(data);
+
+    console.log('📦 Zustand 스토어에 데이터가 저장되었습니다: ', data);
     alert(
-      `[${data.method}] ${data.url} 로 요청을 보낼 준비 완료!\nBody 데이터: ${data.body || '없음'}`,
+      `[저장 성공] ${data.method} ${data.url}\n(이제 이 데이터는 앱 어디서든 꺼내 쓸 수 있음)`,
     );
   };
   /**!SECTION - Function */
